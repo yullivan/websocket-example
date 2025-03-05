@@ -15,6 +15,10 @@ export default function Home() {
 
     client.onConnect = () => {
       console.log("연결되었습니다!");
+      client.subscribe("/topic/room1", (message) => {
+        console.log("메시지 수신함: ");
+        console.log(message.body);
+      });
     };
 
     client.activate();

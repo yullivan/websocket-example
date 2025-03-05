@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatController {
 
     @MessageMapping("/chat")
-    public void handleMessage(ChatMessage chatMessage) {
-        System.out.println(chatMessage);
+    @SendTo("/topic/room1")
+    public ChatMessage handleMessage(ChatMessage chatMessage) {
+        return chatMessage;
     }
 
 }
