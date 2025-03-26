@@ -1,5 +1,6 @@
 package chatserver;
 
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,4 +14,11 @@ public class ChatController {
         return chatMessage;
     }
 
+    @MessageMapping("/chat/{roomId}")
+    @SendTo("/topic/rooms/{roomId}")
+    public ChatMessage sendMessage(ChatMessage message, @DestinationVariable String roomId) {
+        // 메시지 처리 로직
+        System.out.println("roomId: " + roomId);
+        return message;
+    }
 }
